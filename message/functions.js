@@ -310,7 +310,7 @@ async function listPermissions(msg, member, singleAdmin = false) {
 					);
 				else
 					groupAdmins =
-						gcAdmins.find((obj) => obj.first_name === args[1].trim()) || null;
+						gcAdmins.find((obj) => obj.first_name === args[1]?.trim()) || null;
 			}
 		}
 		if (!groupAdmins)
