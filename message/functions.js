@@ -200,14 +200,16 @@ const removeCollection = (msg, all = false) => {
 const checkCollection = (msg) => {
 	const group = msg.chat.username;
 	const chatId = msg.chat.id;
+	const noCollectionMsg = `${group} group doesn't have any stickers banned...`;
 
-	if (!db.has(group) || JSON.parse(db.get(group)).length === 0)
-		return bot.send(
-			chatId,
-			`${group} group doesn't have any stickers banned...`
-		);
-	let data = JSON.parse(db.get(group));
-	if (data === allBannedStickers) return bot.send(chatId, data);
+	if (!db.has(group)) return bot.send(chatId, noCollectionMsg);
+
+	const data = db.get(group);
+
+	if (data == allBannedStickers) return bot.send(chatId, data);
+
+	if (JSON.parse(data).length === 0) return bot.send(chatId, noCollectionMsg);
+
 	return bot.send(
 		chatId,
 		`Here's a list of all the banned sticker collection of ${group}:\n${data.join(
