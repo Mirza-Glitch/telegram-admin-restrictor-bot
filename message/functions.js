@@ -212,9 +212,9 @@ const checkCollection = (msg) => {
 
 	return bot.send(
 		chatId,
-		`Here's a list of all the banned sticker collection of ${group}:\n${data.join(
-			"\n"
-		)}`
+		`Here's a list of all the banned sticker collection of ${group}:\n${JSON.parse(
+			data
+		).join("\n")}`
 	);
 };
 
